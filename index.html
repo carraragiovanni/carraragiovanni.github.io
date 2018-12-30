@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Tulip ROI</title>
+    <style>
+        body {
+            font-family: din-ot, 'Helvetica', 'Arial', sans-serif;
+        }
+        p {
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+        h2 {
+            color: #212e44;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+        h3 {
+            font-size: 1em;
+            font-weight: 300;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        #main-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 2em;
+        }
+        #input-container {
+            width: 400px;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+        #results-container {
+            width: 800px;
+            display: flex;
+            flex-direction: column;
+        }
+        .roi-row > div {
+            width: 25%;
+        }
+        #total-results-container {
+            width: 400px;
+            text-align: right;
+        }
+        .user-input {
+            position: relative;
+            margin-bottom: 40px;
+            color: #212e44;
+        }
+        .value-container {
+            position: relative;
+            margin: 4px 7px;
+        }
+        .value {
+            padding: 3px 5px;
+            font-weight: 400;
+            font-size: 0.75em;
+            color: #fff;
+            border-radius: 4px;
+            position: absolute;
+            background-color: #4a90e2;
+        }
+        .user-input div {
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type=range] {
+            padding: 0 !important;
+            -webkit-appearance: slider-horizontal !important; /* Hides the slider so that custom slider can be made */
+            width: 100%; /* Specific width is required for Firefox. */
+            // background: transparent; /* Otherwise white in Chrome */
+        }
+        
+        input {
+            text-align: right;
+        }
+        .total-results-container {
+            // display: flex;
+            // justify-content: space-between;
+        }
+        .results {
+            text-align: right;
+        }
+        input {
+            width: 225px;
+        }
+        .error-message {
+            background-color: red;
+        }
+        #email-input {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        #cost-of-tulip {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        .cost-of-tulip-background {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            background-color: rgba(255, 215, 0, 0.8);
+            padding: 15px;
+            color: #FAFBFC;
+        }
+        .roi-component {
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+        }
+        .roi-component-digital-workflows {
+            background-color: #B8DCFF;
+        }
+        .roi-component-quality {
+            background-color: #CBE6FF;
+        }
+        .roi-component-training {
+            background-color: #E5F2FF;
+        }
+        #roi-total {
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+        }
+
+        #email-input-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        #email-input {
+            width: 400px;
+            text-align: left;
+        }
+    </style>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div id="main-container">
+        <div id="input-container">
+            <h2>Operation Details</h2>
+            
+            
+            <div class="user-input">
+                <h3>Revenue generated from Operation</h3>
+                <input type="range" min="200" max="31623" value="1000" id="revenueInput">
+                <div class="value-container">
+                    <div class="value" id="revenueValue"></div>
+                </div>
+            </div>
+            
+            
+            <div class="user-input">
+                <h3>Gross Margin of units produced</h3>
+                <input type="range" min="10" max="70" value="60" id="grossMarginInput">
+                <div class="value-container">
+                    <div class="value" id="grossMarginValue"></div>
+                </div>
+            </div>
+            
+            
+            <div class="user-input">
+                <h3>Monthly production volume (units)</h3>
+                <input type="range" min="1" max="1000" value="100" id="monthlyProductionVolumeInput">
+                <div class="value-container">
+                    <div class="value" id="monthlyProductionVolumeValue"></div>
+                </div>
+            </div>
+            
+            
+            <div class="user-input">
+                <h3>Average scrap rate</h3>
+                <input type="range" min="1" max="40" value="3" id="scrapRateInput">
+                <div class="value-container">
+                    <div class="value" id="scrapRateValue"></div>
+                </div>
+            </div>
+            
+            
+            <div class="user-input">
+                <h3>Average rework rate</h3>
+                <input type="range" min="1" max="70" value="5" id="reworkRateInput">
+                <div class="value-container">
+                    <div class="value" id="reworkRateValue"></div>
+                </div>
+            </div>
+            
+            
+            <div class="user-input">
+                <h3>Manufacturing Engineers on staff</h3>
+                <input type="range" min="1" max="15" value="3" id="manufacturingEngineersInput">
+                <div class="value-container">
+                    <div class="value" id="manufacturingEngineersValue"></div>
+                </div>
+            </div>
+            
+            
+            <div class="user-input">
+                <h3>Operators on staff</h3>
+                <input type="range" min="2" max="150" value="30" id="operatorsInput">
+                <div class="value-container">
+                    <div class="value" id="operatorsValue"></div>
+                </div>
+            </div>
+        </div>
+        <div id="results-container">
+            <div id="results-container-values" style="margin-bottom: 25px;">
+
+                <div class="roi-component roi-component-training">
+                    <h3 style="text-align: center">Improved Operator Training</h3>
+                    <h3 class="output" style="font-weight:bold;" id="training"></h3>
+                </div>
+                
+                <div class="roi-component roi-component-quality">
+                    <h3 style="text-align: center">Improved Quality Outcomes</h3>                    
+                    <h3 class="output" style="font-weight:bold;" id="quality"></h3>
+                </div>
+                <div class="roi-component roi-component-digital-workflows">
+                    <h3 style="text-align: center">Savings From Shop Floor Digitization</h3>
+                    <h3 class="output" style="font-weight:bold;" id="digitalWorkflows"></h3>
+                </div>
+                <div id="cost-of-tulip">
+                    <div class="cost-of-tulip-background">
+                        <h3>Cost of Tulip: </h3>
+                        
+                        <div style="text-align:right">
+                                <h3 class="output" id="costOfTulip"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="roi-total">
+                        <h2 style="margin: 0;">Annual Savings: </h2>
+                        <div style="text-align:right">
+                                <h2 class="output" id="totalSavingsPerYear" style="font-weight: bold; margin: 0;"></h2>
+                            </div>
+                        </div>
+                    </div>
+            
+            
+            <canvas id="chart"></canvas>
+            
+            <div id="email-input-container">
+                <input id="email-input" type="text" placeholder="Enter your email">
+                <button style="background-color: #3A89EB; color: white;">Download ROI Model</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="main.js" async defer></script>
+</body>
+</html>
